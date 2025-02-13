@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Card Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 10px; padding: 8px; font-size: 16px; }
+        #result { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h2>Tạo Thiệp Valentine</h2>
+    <label>Ai là người may mắn?</label><br>
+    <input type="text" id="dateName" placeholder="Nhập tên người ấy"><br>
+    
+    <label>Bạn muốn được gọi là gì?</label><br>
+    <input type="text" id="yourName" placeholder="Nhập tên của bạn"><br>
+    
+    <label>Nhập thông điệp ngọt ngào</label><br>
+    <textarea id="message" placeholder="Viết lời nhắn..." maxlength="200"></textarea><br>
+    
+    <button onclick="generateLink()">Tạo Link</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        function generateLink() {
+            let dateName = encodeURIComponent(document.getElementById('dateName').value);
+            let yourName = encodeURIComponent(document.getElementById('yourName').value);
+            let message = encodeURIComponent(document.getElementById('message').value);
+            
+            if (!dateName || !yourName || !message) {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+            
+            let link = `${window.location.origin}/valentine?d=${dateName}&s=${yourName}&t=${message}`;
+            document.getElementById('result').innerHTML = `
+                <p>Chia sẻ link của bạn:</p>
+                <a href="${link}" target="_blank">${link}</a>
+            `;
+        }
+    </script>
+</body>
+</html>
